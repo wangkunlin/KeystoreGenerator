@@ -1,0 +1,47 @@
+plugins {
+    id 'groovy'
+    id 'maven'
+}
+
+group = 'com.github.wangkunlin'
+version = '1.0.0'
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    compileOnly 'com.android.tools.build:gradle:4.2.2'
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    def classifier = 'sources'
+    archiveClassifier.convention(classifier)
+    archiveClassifier.set(classifier)
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    def classifier = 'javadoc'
+    archiveClassifier.convention(classifier)
+    archiveClassifier.set(classifier)
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+// To specify a license in the pom:
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+        }
+    }
+}

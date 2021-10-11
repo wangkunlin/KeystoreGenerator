@@ -1,0 +1,3 @@
+rootProject.name = "KeystoreGenerator"
+include ':app'
+include ':plugin'
