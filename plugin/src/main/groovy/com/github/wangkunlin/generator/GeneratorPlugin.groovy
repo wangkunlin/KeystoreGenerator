@@ -105,7 +105,7 @@ class GeneratorPlugin implements Plugin<Project> {
         def storeFile = variant.signingConfig.storeFile
         generatorTask.keystoreFile = storeFile
         generatorTask.keystorePswFile = project.file("${storeFile.name}.psw")
-        generatorTask.variant = variant
+        generatorTask.signingConfig = variant.signingConfig
 
         task.dependsOn(generatorTask)
     }

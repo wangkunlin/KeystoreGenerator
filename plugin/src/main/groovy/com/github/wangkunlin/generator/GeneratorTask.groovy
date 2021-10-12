@@ -1,6 +1,6 @@
 package com.github.wangkunlin.generator
 
-import com.android.build.gradle.api.ApplicationVariant
+
 import com.android.builder.core.BuilderConstants
 import com.android.builder.model.SigningConfig
 import com.android.builder.signing.DefaultSigningConfig
@@ -9,7 +9,6 @@ import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 
 import java.security.KeyStore
-
 /**
  * On 2020-07-25
  */
@@ -21,11 +20,10 @@ class GeneratorTask extends DefaultTask {
     @OutputFile
     File keystorePswFile
 
-    ApplicationVariant variant
+    SigningConfig signingConfig
 
     @TaskAction
     void taskAction() {
-        SigningConfig signingConfig = variant.signingConfig
         if (isDebug(signingConfig)) {
             return
         }
@@ -64,8 +62,7 @@ class GeneratorTask extends DefaultTask {
                 signingConfig.keyAlias == DefaultSigningConfig.DEFAULT_ALIAS &&
                 signingConfig.keyPassword == DefaultSigningConfig.DEFAULT_PASSWORD &&
                 signingConfig.storePassword == DefaultSigningConfig.DEFAULT_PASSWORD &&
-                signingConfig.storeType == KeyStore.getDefaultType() &&
-                FileUtils.isSameFile(signingConfig.storeFile, new File(KeystoreHelper.defaultDebugKeystoreLocation()))
+                signingConfig.storeType == KeyStore.getDefaultType()
     }
 
 }

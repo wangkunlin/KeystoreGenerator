@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.github.wangkunlin'
-version = '1.0.0'
+version = 'v1.0.1'
 
 dependencies {
     implementation gradleApi()

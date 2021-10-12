@@ -2,11 +2,7 @@ package com.github.wangkunlin.generator
 
 import com.android.annotations.NonNull
 import com.android.annotations.Nullable
-import com.android.prefs.AndroidLocation
-import com.android.utils.EnvironmentProvider
-import com.android.utils.ILogger
 import com.android.utils.Pair
-import com.android.utils.StdLogger
 import org.bouncycastle.asn1.x500.X500Name
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo
 import org.bouncycastle.cert.X509CertificateHolder
@@ -118,34 +114,6 @@ class KeystoreHelper {
         }
 
         return Pair.of(keyPair.getPrivate(), certificate)
-    }
-
-    /**
-     * Returns the location of the default debug keystore.
-     *
-     * @return The location of the default debug keystore
-     * @throws com.android.prefs.AndroidLocation.AndroidLocationException if the location cannot be computed
-     */
-    @NonNull
-    static String defaultDebugKeystoreLocation() throws Exception {
-        return defaultDebugKeystoreLocation(
-                EnvironmentProvider.DIRECT, new StdLogger(StdLogger.Level.VERBOSE))
-    }
-
-    /**
-     * Returns the location of the default debug keystore.
-     *
-     * @return The location of the default debug keystore
-     * @throws com.android.prefs.AndroidLocation.AndroidLocationException if the location cannot be computed
-     */
-    @NonNull
-    static String defaultDebugKeystoreLocation(
-            @NonNull EnvironmentProvider environmentProvider, @NonNull ILogger logger)
-            throws Exception {
-        // this is guaranteed to either return a non null value (terminated with a platform
-        // specific separator), or throw.
-        String folder = AndroidLocation.getFolder(environmentProvider, logger)
-        return folder + "debug.keystore"
     }
 
 }
